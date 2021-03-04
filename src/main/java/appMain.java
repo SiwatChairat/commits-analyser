@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.util.Scanner;
 import ch.uzh.ifi.seal.changedistiller.ChangeDistiller;
 import ch.uzh.ifi.seal.changedistiller.distilling.FileDistiller;
 import ch.uzh.ifi.seal.changedistiller.model.entities.SourceCodeChange;
@@ -205,18 +205,81 @@ public class appMain {
         }
     }
 
-    private static void run() throws IOException, InterruptedException {
-        String pathToProjectRepo = "/Users/Siwat/Desktop/UCL/3rd year/CS final project/myApp" +
-                "/analyser/gitProjects/fastjson";
-        String pathToFolder = "/Users/Siwat/Desktop/Analusis/testProject/testChange";
-        ArrayList<String> listOfHead = extractHeadFromTxt(
-                "/Users/Siwat/Desktop/Analusis/testProject/testChange/1.txt");
-        createCsvReport(pathToProjectRepo, pathToFolder, "test", listOfHead);
+    private static String askInput() {
+        Scanner in = new Scanner(System.in);
+        String s = "";
+        while (s.compareTo("") == 0) {
+            s = in.nextLine();
+        }
+        return s;
+    }
+
+    private static ArrayList<String> extractLineChanges(String pathToProjectRepo, ArrayList<String> commits, String sign) throws IOException, InterruptedException {
+        ProcessBuilder builder = new ProcessBuilder();
+        File file = new File(pathToProjectRepo);
+        builder.directory(file);
+        ArrayList<String> arr = new ArrayList<>();
+        for (String commit : commits) {
+            builder.command("git", "show", commit, "--numstat");
+            Process ssh = builder.start();
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(ssh.getInputStream()));
+            String output;
+            while ((output = stdInput.readLine()) != null) {
+                if (!output.contains("commit") && !output.contains("Date") && !output.contains("Author")
+                        && output.matches("[0-9-]+\t[0-9-]+(.*)")) {
+                    if (sign.compareTo("+") == 0) {
+                        int index = output.indexOf("\t");
+                        String temp = output.substring(0, index);
+                        if (temp.contains("-")) {
+                            temp = temp.replaceAll("-", "0");
+                        }
+                        arr.add(temp);
+                    } else if (sign.compareTo("-") == 0) {
+                        int index1 = output.indexOf("\t") + 1;
+                        String temp1 = output.substring(index1);
+                        int index2 = temp1.indexOf("\t");
+                        String temp2 = temp1.substring(0, index2);
+                        if (temp2.contains("-")) {
+                            temp2 = temp2.replaceAll("-", "0");
+                        }
+                        arr.add(temp2);
+                    }
+                }
+            }
+            ssh.waitFor();
+        }
+        return arr;
+    }
+
+    private static void run1() throws IOException, InterruptedException {
+        System.out.println("Enter path to project repo: ");
+        String pathToProjectRepo = askInput();
+        System.out.println("Enter path to folder to copy files: ");
+        String pathToFolder = askInput();
+        System.out.println("Enter path to files contain list of commits: ");
+        String textFile = askInput();
+        System.out.println("Enter report name: ");
+        String reportName = askInput();
+        ArrayList<String> listOfHead = extractHeadFromTxt(textFile);
+        createCsvReport(pathToProjectRepo, pathToFolder, reportName, listOfHead);
+    }
+
+    private static void run2() throws IOException, InterruptedException {
+        System.out.println("Enter path to project repo: ");
+        String pathToProjectRepo = askInput();
+        System.out.println("Enter path to files contain list of commits: ");
+        String textFile = askInput();
+        System.out.println("Enter the sign [+/-]: ");
+        String sign = askInput();
+        ArrayList<String> listOfHead = extractHeadFromTxt(textFile);
+        ArrayList<String> arr = extractLineChanges(pathToProjectRepo, listOfHead, sign);
+        System.out.println(arr);
+        System.out.println("Size of changes: " + arr.size());
     }
 
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        run();
+        run2();
     }
 
 
