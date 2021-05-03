@@ -1,0 +1,19 @@
+NO.,HEAD,CHANGE TYPE,CHANGED STATEMENT,PARENT ENTITY,ROOT ENTITY,SIGNIFICANCE LEVEL
+5,084087f2ec8eb411eb25c741c73cb1a7fafa024f,REMOVED_FUNCTIONALITY,METHOD: retrofit2.CompletableFutureAndroidTest.completableFuturePreApi24(),CLASS: retrofit2.CompletableFutureAndroidTest,retrofit2.CompletableFutureAndroidTest,CRUCIAL
+5,084087f2ec8eb411eb25c741c73cb1a7fafa024f,STATEMENT_DELETE,METHOD_INVOCATION: assertThat(optional).isNotNull();,METHOD: retrofit2.OptionalConverterFactoryAndroidTest.optionalApi24(),retrofit2.OptionalConverterFactoryAndroidTest.optionalApi24(),MEDIUM
+5,084087f2ec8eb411eb25c741c73cb1a7fafa024f,REMOVED_FUNCTIONALITY,METHOD: retrofit2.OptionalConverterFactoryAndroidTest.optionalPreApi24(),CLASS: retrofit2.OptionalConverterFactoryAndroidTest,retrofit2.OptionalConverterFactoryAndroidTest,CRUCIAL
+13,bcf07d0dffefb4ca1a33d431f5d38cab888b7d11,STATEMENT_INSERT,"RETURN_STATEMENT: (Dalvik"".equals(System.getProperty(""java.vm.name"")) ? new Android() : new Platform(true));""",METHOD: retrofit2.Platform.findPlatform(),retrofit2.Platform.findPlatform(),LOW
+13,bcf07d0dffefb4ca1a33d431f5d38cab888b7d11,STATEMENT_DELETE,"METHOD_INVOCATION: Class.forName(android.os.Build"");""",BODY: ,retrofit2.Platform.findPlatform(),MEDIUM
+13,bcf07d0dffefb4ca1a33d431f5d38cab888b7d11,STATEMENT_DELETE,RETURN_STATEMENT: new Android();,THEN_STATEMENT: (Build.VERSION.SDK_INT != 0),retrofit2.Platform.findPlatform(),MEDIUM
+13,bcf07d0dffefb4ca1a33d431f5d38cab888b7d11,STATEMENT_DELETE,IF_STATEMENT: (Build.VERSION.SDK_INT != 0),BODY: ,retrofit2.Platform.findPlatform(),MEDIUM
+13,bcf07d0dffefb4ca1a33d431f5d38cab888b7d11,STATEMENT_DELETE,CATCH_CLAUSE: ClassNotFoundException,CATCH_CLAUSES: ,retrofit2.Platform.findPlatform(),MEDIUM
+13,bcf07d0dffefb4ca1a33d431f5d38cab888b7d11,STATEMENT_DELETE,TRY_STATEMENT: ,METHOD: retrofit2.Platform.findPlatform(),retrofit2.Platform.findPlatform(),MEDIUM
+13,bcf07d0dffefb4ca1a33d431f5d38cab888b7d11,STATEMENT_DELETE,RETURN_STATEMENT: new Platform(true);,METHOD: retrofit2.Platform.findPlatform(),retrofit2.Platform.findPlatform(),MEDIUM
+32,bc119896a328cb314df279b26cc68eebd19c4b31,STATEMENT_INSERT,"SWITCH_STATEMENT: System.getProperty(java.vm.name"")""",METHOD: retrofit2.Platform.findPlatform(),retrofit2.Platform.findPlatform(),LOW
+32,bc119896a328cb314df279b26cc68eebd19c4b31,STATEMENT_INSERT,"SWITCH_CASE: Dalvik""""","SWITCH_STATEMENT: System.getProperty(java.vm.name"")""",retrofit2.Platform.findPlatform(),LOW
+32,bc119896a328cb314df279b26cc68eebd19c4b31,STATEMENT_INSERT,RETURN_STATEMENT: new Android();,"SWITCH_STATEMENT: System.getProperty(java.vm.name"")""",retrofit2.Platform.findPlatform(),LOW
+32,bc119896a328cb314df279b26cc68eebd19c4b31,STATEMENT_INSERT,"SWITCH_CASE: RoboVM""""","SWITCH_STATEMENT: System.getProperty(java.vm.name"")""",retrofit2.Platform.findPlatform(),LOW
+32,bc119896a328cb314df279b26cc68eebd19c4b31,STATEMENT_INSERT,RETURN_STATEMENT: new Platform(false);,"SWITCH_STATEMENT: System.getProperty(java.vm.name"")""",retrofit2.Platform.findPlatform(),LOW
+32,bc119896a328cb314df279b26cc68eebd19c4b31,STATEMENT_INSERT,SWITCH_CASE: default,"SWITCH_STATEMENT: System.getProperty(java.vm.name"")""",retrofit2.Platform.findPlatform(),LOW
+32,bc119896a328cb314df279b26cc68eebd19c4b31,STATEMENT_INSERT,RETURN_STATEMENT: new Platform(true);,"SWITCH_STATEMENT: System.getProperty(java.vm.name"")""",retrofit2.Platform.findPlatform(),LOW
+32,bc119896a328cb314df279b26cc68eebd19c4b31,STATEMENT_DELETE,"RETURN_STATEMENT: (Dalvik"".equals(System.getProperty(""java.vm.name"")) ? new Android() : new Platform(true));""",METHOD: retrofit2.Platform.findPlatform(),retrofit2.Platform.findPlatform(),MEDIUM
